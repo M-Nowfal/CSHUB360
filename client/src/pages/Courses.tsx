@@ -3,7 +3,7 @@ import useFetchWithPagination from "../hooks/useFetchWithPagination"; // Import 
 import CourseCard from "../components/cards/CourseCard";
 import type { Course } from "../types/course";
 import { SpinnerLoader } from "../components/ui/loader";
-import Error from "../components/Error";
+import { Error } from "../components/Error";
 import { Input } from "../components/ui/input";
 import { useEffect, useId, useState, type JSX, useCallback, useRef } from "react";
 import { Button } from "../components/ui/button";
@@ -164,7 +164,7 @@ const Courses = (): JSX.Element => {
         </>
       )}
 
-      {!loading && courses.length === 0 && (
+      {!loading && courses.length === 0 && !error && (
         <div className="flex flex-col items-center justify-center gap-4 text-center mt-10 p-7">
           <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
             No Courses Found

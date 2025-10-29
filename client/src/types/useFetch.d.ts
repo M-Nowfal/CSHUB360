@@ -9,7 +9,7 @@ interface UseFetchReturnType {
   data: any;
   loading: boolean;
   error: FetchError | null;
-  refetch: (param1?, param2?) => void;
+  refetch: (newUrl?: string, newBody?: BodyType, dontSkip?: boolean, bypaceCache?: boolean) => Promise<void>;
   clearCache: () => void;
   getCacheStats: () => void;
 };

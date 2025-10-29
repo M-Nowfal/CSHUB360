@@ -1,38 +1,24 @@
 import bcrypt from "bcryptjs";
-import { ValidationError } from "./errors";
+import { BCRYPT_CONFIG } from "../utils/constants";
 
-export class PasswordService {
-  private static readonly SALT_ROUNDS = 12;
-
-  static async hash(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt(this.SALT_ROUNDS);
-    return await bcrypt.hash(password, salt);
+const hash = async (password: string): Promise<string> => {
+  try {
+    const saltRounds = await bcrypt.genSalt(BCRYPT_CONFIG.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error.message : String(error);
+    throw new Error(err);
   }
+};
 
-  static async compare(password: string, hash: string): Promise<boolean> {
-    return await bcrypt.compare(password, hash);
+const compare = async (password: string, hashedPassword: string): Promise<boolean> => {
+  try {
+    return await bcrypt.compare(password, hashedPassword);
+  } catch (error: unknown) {
+    const err = error instanceof Error ? error.message : String(error);
+    throw new Error(err);
   }
+};
 
-  static validate(password: string): boolean {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    if (password.length < minLength) {
-      throw new ValidationError("Password must be at least 8 characters long");
-    }
-    if (!hasUpperCase || !hasLowerCase) {
-      throw new ValidationError("Password must contain uppercase and lowercase letters");
-    }
-    if (!hasNumbers) {
-      throw new ValidationError("Password must contain at least one number");
-    }
-    if (!hasSpecialChar) {
-      throw new ValidationError("Password must contain at least one special character");
-    }
-
-    return true;
-  }
-}
+export { hash, compare };

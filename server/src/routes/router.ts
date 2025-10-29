@@ -3,15 +3,17 @@ import instructorRoutes from "./instructor/instructor.routes";
 import studentRoutes from "./student/student.routes";
 import adminRoutes from "./admin/admin.routes";
 import publicRouter from "./public.routes";
+import authRoutes from "./auth.routes";
 
 // Create main router
 const router = express.Router();
 
 // Mount routers
-router.use("/", publicRouter);
+router.use("/auth", authRoutes);
 router.use("/admin", adminRoutes);
 router.use("/instructor", instructorRoutes);
 router.use("/student", studentRoutes);
+router.use("/", publicRouter);
 
 // Health check
 router.get("/health", (_req: express.Request, res: express.Response, next: express.NextFunction) => {

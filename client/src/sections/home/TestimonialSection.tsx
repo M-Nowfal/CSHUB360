@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import TestimonialCard from "../../components/cards/TestimonialCard";
-import Error from "../../components/Error";
+import { Error } from "../../components/Error";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from "../../components/ui/card";
 import { SpinnerLoader } from "../../components/ui/loader";

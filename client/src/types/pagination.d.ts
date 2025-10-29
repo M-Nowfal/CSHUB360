@@ -1,25 +1,6 @@
 import type { Course } from "./course";
 import type { UseFetchReturnType } from "./useFetch";
 
-// interface PaginationData {
-//   courses: Course[];
-//   pagination: {
-//     page?: number;
-//     limit: number;
-//     totalCourses?: number;
-//     totalPages?: number;
-//     hasMore: boolean;
-//     nextCursor?: string | null;
-//   };
-// };
-
-// interface UseFetchReturnWithPagination extends UseFetchReturnType {
-//   pagination: PaginationData["pagination"] | null;
-//   loadMore: () => void;
-//   hasMore: boolean;
-//   isFetchingMore: boolean;
-// };
-
 export interface PaginationInfo {
   page?: number;
   limit: number;

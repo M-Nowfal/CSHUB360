@@ -1,35 +1,39 @@
 import { z, ZodError } from "zod";
-import { Department, UserRole } from "../types/user.types";
+import { UserRole } from "../types/user.types";
 import { ValidationError } from "./errors";
 
 export const loginSchema = z.object({
-  email: z.email("Invalid college email address"),
-  password: z.string().min(1, "Password is required"),
+  email: z.email("Invalid email address")
+    .min(1, "Email is required")
+    .toLowerCase()
+    .trim(),
+  password: z.string()
+    .min(1, "Password is required")
+    .min(8, "Password must be at least 8 characters")
+    .max(100, "Password must be less than 100 characters")
+    .regex(
+      /^(?=.*[a-z])(?=.*\d)/,
+      "Password must contain at least one lowercase letter and one number"
+    ),
   role: z.enum(Object.values(UserRole) as [string, ...string[]]).optional()
 });
 
-export const studentRegistrationSchema = z.object({
+export const studentSignUpSchema = z.object({
   email: z.email("Invalid college email address"),
   password: z.string()
     .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Password must contain uppercase letter")
     .regex(/[a-z]/, "Password must contain lowercase letter")
     .regex(/[0-9]/, "Password must contain number")
     .regex(/[^A-Za-z0-9]/, "Password must contain special character"),
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  rollNumber: z.string().regex(/^[A-Z0-9]+$/, "Invalid roll number format"),
-  department: z.enum(Object.values(Department) as [string, ...string[]]),
-  semester: z.number().min(1).max(8),
-  batch: z.string().regex(/^\d{4}-\d{4}$/, "Batch format: YYYY-YYYY")
+  firstName: z.string().min(2, "First-Name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last-Name must be at least 2 characters")
 });
 
-export const teacherRegistrationSchema = z.object({
+export const InstructorSignUpSchema = z.object({
   email: z.email("Invalid college email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  employeeId: z.string().regex(/^[A-Z0-9]+$/, "Invalid employee ID format"),
-  department: z.enum(Object.values(Department) as [string, ...string[]]),
-  designation: z.string().min(2, "Designation is required"),
+  firstName: z.string().min(2, "Fist-Name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last-Name must be at least 2 characters"),
   specialization: z.string().min(2, "Specialization is required")
 });
 

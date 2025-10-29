@@ -5,9 +5,12 @@ import { Card, CardHeader, CardTitle, CardDescription } from "../components/ui/c
 import useScroll from "../hooks/useScroll";
 import CONSTANTS from "../utils/constants";
 import type { JSX } from "react";
+import AuthDialog from "../components/auth/AuthDialog";
+import { useAppSelector } from "../redux/hooks";
 
 const GetStart = (): JSX.Element => {
   useScroll("top");
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
 
   return (
     <section className="min-h-svh flex flex-col items-center justify-center px-6 py-30">
@@ -59,9 +62,9 @@ const GetStart = (): JSX.Element => {
               Explore Courses <ArrowRight className="group-hover:translate-x-3 transition-all duration-300" />
             </Button>
           </Link>
-          <Button variant="primary" className="md:flex-1 w-full" size="lg">
-            Login
-          </Button>
+          {!isLoggedIn && <div className="w-full md:flex-1">
+            <AuthDialog defaultType="login" variant="primary" className="w-full" />
+          </div>}
         </div>
       </div>
     </section>

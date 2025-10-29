@@ -11,13 +11,16 @@ const BouncingLoader = () => {
   );
 }
 
-const SpinnerLoader = ({ size = 10 }: { size?: number }) => {
+const SpinnerLoader = ({ size = 10, color = "emerald" }: { size?: number, color?: string }) => {
+
+  const spinnerColor = color === "emerald" ? "border-t-emerald-600 border-b-emerald-600 border-l-emerald-600" : "border-t-white border-b-white border-l-white border-r-emerald-600";
+
   return (
     <div className="flex items-center justify-center">
       <div className="relative">
         <div
           style={{ width: size * 4, height: size * 4 }} 
-          className="border-4 border-t-emerald-600 border-b-emerald-600 border-l-emerald-600 rounded-full animate-spin" 
+          className={`border-4 ${spinnerColor} rounded-full animate-spin`}
         />
       </div>
     </div>

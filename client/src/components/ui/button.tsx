@@ -21,6 +21,7 @@ const buttonVariants = cva(
           "hover:bg-emerald-200/30 hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         danger: "border border-rose-500 bg-rose-500/10 hover:bg-rose-500/30 text-rose-500",
+        none: null,
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

@@ -1,18 +1,34 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-// ----------- Student Slice ----------
+interface Student {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  rollNumber?: string;
+  department?: string;
+  semester?: number;
+}
+
 const studentSlice = createSlice({
   name: "student",
-  initialState: null,
+  initialState: null as Student | null,
   reducers: {
-    setStudent(_state, action: PayloadAction) {
+    setStudent: (_state, action: PayloadAction<Student>) => {
       return action.payload;
     },
-    getStudent(state) {
+    clearStudent: () => {
+      return null;
+    },
+    updateStudent: (state, action: PayloadAction<Partial<Student>>) => {
+      if (state) {
+        return { ...state, ...action.payload };
+      }
       return state;
     }
   }
 });
 
-export const { setStudent, getStudent } = studentSlice.actions;
+export const { setStudent, clearStudent, updateStudent } = studentSlice.actions;
 export default studentSlice.reducer;

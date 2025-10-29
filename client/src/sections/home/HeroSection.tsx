@@ -6,7 +6,7 @@ import type { JSX } from "react";
 
 const HeroSection = (): JSX.Element => {
   return (
-    <div className="min-h-svh flex flex-col justify-center mt-20 lg:mt-10">
+    <div className="flex flex-col justify-center mt-25">
       <div className="flex flex-col justify-center items-center w-[90%] max-w-4xl xl:max-w-5xl m-auto">
         <h1 className="font-bold text-4xl md:text-5xl xl:text-6xl text-center leading-tight">
           Empower your future with courses designed to
@@ -45,13 +45,13 @@ const HeroSection = (): JSX.Element => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-12 w-full max-w-2xl">
-          <Link to="/courses" className="sm:flex-1 group">
+          <Link to="/courses" className="sm:flex-1 group" viewTransition>
             <Button variant="primary" size="lg" className="w-full">
               Explore Courses
               <ArrowRight className="group-hover:translate-x-3 transition-all duration-300" />
             </Button>
           </Link>
-          <Link to="/learnmore" className="sm:flex-1 group">
+          <Link to="/learnmore" className="sm:flex-1 group" viewTransition>
             <Button variant="secondary" size="lg" className="w-full">
               Learn More
               <ArrowRight className="group-hover:translate-x-3 transition-all duration-300" />

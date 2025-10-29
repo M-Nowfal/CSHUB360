@@ -6,11 +6,15 @@ import { Link, useNavigate, type NavigateFunction } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import type { JSX } from "react";
 import useHistory from "../hooks/useHistory";
+import AuthDialog from "./auth/AuthDialog";
+import { useAppSelector } from "../redux/hooks";
+import UserMenu from "./UserMenu";
 
-const Navbar = ({ isLoggedIn = false }: { isLoggedIn?: boolean }): JSX.Element => {
-
+const Navbar = (): JSX.Element => {
+  
   const navigate: NavigateFunction = useNavigate();
   const canGoBack = useHistory();
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
 
   return (
     <nav className={`flex items-center justify-between py-2 px-4 md:pe-20 ${canGoBack ? "md:ps-15" : "md:ps-7"} backdrop-blur-xl fixed top-0 w-full z-10 shadow dark:shadow-slate-700`}>
@@ -29,7 +33,7 @@ const Navbar = ({ isLoggedIn = false }: { isLoggedIn?: boolean }): JSX.Element =
             <p>Back</p>
           </TooltipContent>
         </Tooltip>}
-        <Link to="/" className="flex gap-2 items-center">
+        <Link to="/" className="flex gap-2 items-center" viewTransition>
           <figure className="flex items-center gap-2 relative">
             <img
               src={CONSTANTS.APP_LOGO}
@@ -46,11 +50,10 @@ const Navbar = ({ isLoggedIn = false }: { isLoggedIn?: boolean }): JSX.Element =
       <div className="flex gap-3 items-center">
         {isLoggedIn ? (<>
           {/* User Profile goes here */}
+          <UserMenu />
         </>) : (<>
-          <Button variant="ghost">Login</Button>
-          <Button variant="primary" className="hidden md:block">
-            Create Account
-          </Button>
+          <AuthDialog defaultType="login" variant="ghost" />
+          <AuthDialog defaultType="signup" variant="primary" className="hidden md:block" />
         </>)}
         <Tooltip>
           <TooltipTrigger asChild>

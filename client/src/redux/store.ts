@@ -2,14 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import roleReducer from "./slice/roleSlice";
 import studentReducer from "./slice/studentSlice";
 import instructorReducer from "./slice/instructorSlice";
-import adminReducer from "./slice/adminSlice";
+import authReducer from "./slice/authSlice";
 
 const store = configureStore({
   reducer: {
     role: roleReducer,
     student: studentReducer,
     instructor: instructorReducer,
-    admin: adminReducer,
+    auth: authReducer,
   }
 });
 

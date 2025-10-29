@@ -12,7 +12,7 @@ const useFetch = (
   method: MethodType = "GET",
   headers: HeadersType = {},
   body: BodyType = {},
-  skip?: boolean,
+  skip: boolean = method !== "GET",
   enableCache: boolean = true // New parameter to control caching
 ): UseFetchReturnType => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,10 +26,11 @@ const useFetch = (
   const fetchData = async (
     newUrl?: string,
     newBody?: BodyType,
+    dontSkip?: boolean,
     bypassCache: boolean = false // Force fresh data
   ): Promise<void> => {
-    if (skip || stopFetch && !newUrl) return;
 
+    if (!dontSkip && (skip || stopFetch) && (!newUrl && !newBody)) return;
     const finalUrl = newUrl ? `${base_url}${newUrl}` : `${base_url}${url}`;
     const finalBody = newBody ?? body;
 
@@ -117,7 +118,7 @@ const useFetch = (
         controllerRef.current.abort();
       }
     };
-  }, []);
+  }, [skip, url]);
 
   return {
     data,

@@ -6,12 +6,14 @@ import router from "./routes/router";
 import { CORS_OPTIONS, SERVER_CONFIG } from "./utils/constants";
 import apiLimiter from "./middlewares/rateLimiter.middleware";
 import { ensureDBConnection } from "./middlewares/db.middleware";
+import cookieParser from "cookie-parser";
 
 // Create express app
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(CORS_OPTIONS));
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());

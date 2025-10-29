@@ -15,14 +15,14 @@ interface ErrorProps {
   };
 };
 
-const Error = ({ 
+const Error = ({
   resource = "unknown",
   onRetry,
   error,
   variant = "generic",
   action
 }: ErrorProps): JSX.Element => {
-  
+
   const getIcon = () => {
     switch (variant) {
       case "network":
@@ -51,7 +51,7 @@ const Error = ({
 
   const getDescription = () => {
     if (error?.message) return error.message;
-    
+
     switch (variant) {
       case "network":
         return `We"re having trouble connecting to the server. Please check your internet connection and try again.`;
@@ -76,7 +76,7 @@ const Error = ({
         <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
           {getTitle()}
         </h3>
-        
+
         <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
           {getDescription()}
         </p>
@@ -93,7 +93,7 @@ const Error = ({
           <RefreshCw className="w-4 h-4" />
           Try Again
         </Button>
-        
+
         {action && (
           <Button
             onClick={action.onClick}
@@ -121,4 +121,10 @@ const Error = ({
   );
 };
 
-export default Error;
+const ValidationError = ({ error }: { error: string }) => {
+  return (
+    <p className="text-xs font-semibold text-red-500">{error}</p>
+  );
+}
+
+export { Error, ValidationError };

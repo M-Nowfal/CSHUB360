@@ -4,7 +4,7 @@ import type { Course } from "../../types/course";
 import CourseCard from "../../components/cards/CourseCard";
 import { Button } from "../../components/ui/button";
 import { SpinnerLoader } from "../../components/ui/loader";
-import Error from "../../components/Error";
+import { Error } from "../../components/Error";
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "../../components/ui/card";
 import SearchBar from "./SearchBar";
 import type { JSX } from "react";

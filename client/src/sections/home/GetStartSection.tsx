@@ -20,7 +20,7 @@ const GetStartSection = (): JSX.Element => {
             Get Started
           </Button>
         </Link>
-        <Link to="/learnmore" className="sm:flex-1 group">
+        <Link to="/learnmore" className="sm:flex-1 group" viewTransition>
           <Button variant="secondary" size="lg" className="w-full">
             Learn More
             <ArrowRight className="group-hover:translate-x-3 transition-all duration-300" />

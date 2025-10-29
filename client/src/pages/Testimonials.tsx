@@ -3,7 +3,7 @@ import useFetchWithPagination from "../hooks/useFetchWithPagination";
 import TestimonialCard from "../components/cards/TestimonialCard";
 import type { Testimonial } from "../types/testimonial";
 import { SpinnerLoader } from "../components/ui/loader";
-import Error from "../components/Error";
+import { Error } from "../components/Error";
 import { Button } from "../components/ui/button";
 import useScroll from "../hooks/useScroll";
 import { MessageSquare, PlusCircle } from "lucide-react";

@@ -1,6 +1,6 @@
 import express from "express";
 
 // Create router for teacher authentication routes
-const teacherAuthRoutes = express.Router();
+const instructorAuthRoutes = express.Router();
 
-export default teacherAuthRoutes;
+export default instructorAuthRoutes;
