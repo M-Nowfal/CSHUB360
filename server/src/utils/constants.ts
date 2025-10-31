@@ -22,13 +22,6 @@ export const JWT_CONFIG = {
   }
 };
 
-export const COOKIE_OPTIONS = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict" as const,
-  path: "/"
-};
-
 export const APP_CONFIG = {
   NAME: "CSHUB360",
   COLLEGE_NAME: process.env.COLLEGE_NAME || "Your College",

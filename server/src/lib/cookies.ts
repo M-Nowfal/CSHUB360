@@ -1,9 +1,11 @@
 import { SERVER_CONFIG } from "../utils/constants";
 
+const sameSite = SERVER_CONFIG.NODE_ENV === "production" ? "none" : "lax";
+
 export const cookieOptions = {
   httpOnly: true,
   secure: SERVER_CONFIG.NODE_ENV === "production", // HTTPS in production
-  sameSite: "strict" as const, // CSRF protection
+  sameSite: `${sameSite}` as const,
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   path: "/",
 };
